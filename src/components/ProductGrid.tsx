@@ -44,7 +44,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          className="border rounded px-3 py-2 w-full sm:max-w-xs"
+          className="border rounded text-gray-500 px-3 py-2 w-full sm:max-w-xs"
         >
           {categories.map((cat) => (
             <option key={cat} value={cat}>

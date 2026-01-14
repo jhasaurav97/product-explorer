@@ -30,7 +30,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             </p>
 
             <p className="font-semibold mt-1">
-                {product.price}
+                ${product.price}
             </p>
         </Link>
     )
