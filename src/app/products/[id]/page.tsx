@@ -1,16 +1,10 @@
 import Image from "next/image";
 import { fetchProductById } from "@/lib/api";
 
-interface ProductPageProps {
-    params: {
-        id: string;
-    };
-}
-
-export default async function ProductPage({
-    params,
-}: ProductPageProps) {
-  const product = await fetchProductById(params.id);
+export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
+    
+  const { id } = await params;
+  const product = await fetchProductById(id);
 
   return (
     <main className="max-w-5xl mx-auto px-4 py-6">

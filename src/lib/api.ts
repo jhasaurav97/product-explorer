@@ -11,7 +11,7 @@ export async function fetchProducts(): Promise<Product[]> {
 } 
 
 export async function fetchProductById(id: string): Promise<Product> {
-    const res = await fetch(`https://fakestoreapi.com/products${id}`);
+    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
 
     if (!res.ok) {
         throw new Error("Failed to fetch product");
