@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { FavoritesProvider } from "@/context/FavoritesContext";
 
 export const metadata: Metadata = {
   title: "Product Explorer",
@@ -13,10 +14,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className="bg-gray-50 text-gray-900"
-      >
-        {children}
+      <body className="bg-gray-50 text-gray-900">
+        <FavoritesProvider>{children}</FavoritesProvider>
       </body>
     </html>
   );
