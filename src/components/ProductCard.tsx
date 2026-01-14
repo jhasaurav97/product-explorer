@@ -1,37 +1,39 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Product } from "@/types/product";
+import FavoriteButton from "./FavoriteButton";
+import { useFavorites } from "@/context/FavoritesContext";
 
 interface ProductCardProps {
-    product: Product;
+  product: Product;
 }
 
 export default function ProductCard({ product }: ProductCardProps) {
-    return (
-        <Link
-            href={`/products/${product.id}`}
-            className="border rounded-lg p-3 hover:shadow transition block"
-        >
-            <div className="relative h-40 mb-3">
-                <Image
-                    src={product.image}
-                    alt={product.title}
-                    fill
-                    className="object-contain"
-                />
-            </div>
-            
-            <h2 className="text-sm font-medium line-clamp-2">
-                {product.title}
-            </h2>
+  const { isFavorite, toggleFavorite } = useFavorites();
+  return (
+    <div className="relative border rounded-lg p-3 hover:shadow transition">
+      <div className="absolute top-2 right-2 z-10">
+        <FavoriteButton
+          isActive={isFavorite(product.id)}
+          onToggle={() => toggleFavorite(product.id)}
+        />
+      </div>
+      <Link href={`/products/${product.id}`}>
+        <div className="relative h-40 mb-3">
+          <Image
+            src={product.image}
+            alt={product.title}
+            fill
+            className="object-contain"
+          />
+        </div>
 
-            <p className="text-sm text-gray-500 capitalize">
-                {product.category}
-            </p>
+        <h2 className="text-sm font-medium line-clamp-2">{product.title}</h2>
 
-            <p className="font-semibold mt-1">
-                ${product.price}
-            </p>
-        </Link>
-    )
+        <p className="text-sm text-gray-500 capitalize">{product.category}</p>
+
+        <p className="font-semibold mt-1">${product.price}</p>
+      </Link>
+    </div>
+  );
 }
