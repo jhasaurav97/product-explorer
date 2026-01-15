@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { fetchProductById } from "@/lib/api";
+import ProductDetailsClient from "@/components/ProductDetailsClient";
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
     
@@ -26,6 +27,8 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
           <p className="text-xl font-semibold mb-4">${product.price}</p>
 
           <p className="text-gray-700 leading-relaxed">{product.description}</p>
+
+          <ProductDetailsClient product={product} />
         </div>
       </div>
     </main>
