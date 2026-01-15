@@ -26,10 +26,6 @@ export default async function HomePage() {
     loadProducts();
   }, []);
 
-  if (loading) {
-    return <p className="p-6">Loading products...</p>;
-  }
-
   if (error) {
     return <p className="p-6 text-red-600">Failed to load products.</p>;
   }
