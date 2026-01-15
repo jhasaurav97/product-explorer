@@ -11,7 +11,7 @@ interface ProductCardProps {
 export default function ProductCard({ product }: ProductCardProps) {
   const { isFavorite, toggleFavorite } = useFavorites();
   return (
-    <div className="relative border rounded-lg p-3 hover:shadow transition">
+    <div className="relative border rounded-lg p-3 hover:shadow transition bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
       <div className="absolute top-2 right-2 z-10">
         <FavoriteButton
           isActive={isFavorite(product.id)}
