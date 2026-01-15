@@ -2,6 +2,7 @@ import Image from "next/image";
 import { fetchProductById } from "@/lib/api";
 import ProductDetailsClient from "@/components/ProductDetailsClient";
 
+export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
