@@ -13,6 +13,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
   const [showFavorites, setShowFavorites] = useState(false);
+  const [sortOrder, setSortOrder] = useState<"none" | "asc" | "desc">("none");
   const { favorites } = useFavorites();
 
   const categories = useMemo(() => {
@@ -20,7 +21,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
   }, [products]);
 
   const filteredProducts = useMemo(() => {
-    return products.filter((product) => {
+    let result = products.filter((product) => {
       const matchesSearch = product.title
         .toLowerCase()
         .includes(search.toLowerCase());
@@ -33,7 +34,16 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
       return matchesSearch && matchesCategory && matchesFavorites;
     });
-  }, [products, search, category, showFavorites, favorites]);
+    if (sortOrder === "asc") {
+      result = [...result].sort((a, b) => a.price - b.price);
+    }
+
+    if (sortOrder === "desc") {
+      result = [...result].sort((a, b) => b.price - a.price);
+    }
+
+    return result;
+  }, [products, search, category, showFavorites, favorites, sortOrder]);
 
   return (
     <>
@@ -66,6 +76,16 @@ export default function ProductGrid({ products }: ProductGridProps) {
           />
           Show favorites only
         </label>
+        <select
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value as "none" | "asc" | "desc")}
+          className="border rounded px-3 py-2 text-sm"
+          aria-label="Sort products by price"
+        >
+          <option value="none">Sort by price</option>
+          <option value="asc">Price: Low to High</option>
+          <option value="desc">Price: Hight to Low</option>
+        </select>
       </div>
 
       {/* Grid */}
