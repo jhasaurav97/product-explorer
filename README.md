@@ -8,7 +8,7 @@ This project was built as part of a Frontend Technical Assignment with a focus o
 ---
 
 ## 🚀 Live Demo
-👉 (Add your Vercel link here after deployment)
+👉 https://product-explorer-six-lemon.vercel.app/
 
 ---
 
