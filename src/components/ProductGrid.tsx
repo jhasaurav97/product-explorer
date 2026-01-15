@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Product } from "@/types/product";
 import ProductCard from "./ProductCard";
+import { useFavorites } from "@/context/FavoritesContext";
 
 interface ProductGridProps {
   products: Product[];
@@ -11,6 +12,8 @@ interface ProductGridProps {
 export default function ProductGrid({ products }: ProductGridProps) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("all");
+  const [showFavorites, setShowFavorites] = useState(false);
+  const { favorites } = useFavorites();
 
   const categories = useMemo(() => {
     return ["all", ...new Set(products.map((p) => p.category))];
@@ -24,10 +27,13 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
       const matchesCategory =
         category === "all" || product.category === category;
+      
+      const matchesFavorites =
+        !showFavorites || favorites.includes(product.id);
 
-      return matchesSearch && matchesCategory;
+      return matchesSearch && matchesCategory && matchesFavorites;
     });
-  }, [products, search, category]);
+  }, [products, search, category, showFavorites, favorites]);
 
   return (
     <>
@@ -52,6 +58,14 @@ export default function ProductGrid({ products }: ProductGridProps) {
             </option>
           ))}
         </select>
+        <label className="flex items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            checked={showFavorites}
+            onChange={(e) => setShowFavorites(e.target.checked)}
+          />
+          Show favorites only
+        </label>
       </div>
 
       {/* Grid */}
