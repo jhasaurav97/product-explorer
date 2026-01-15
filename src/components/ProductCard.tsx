@@ -18,7 +18,10 @@ export default function ProductCard({ product }: ProductCardProps) {
           onToggle={() => toggleFavorite(product.id)}
         />
       </div>
-      <Link href={`/products/${product.id}`}>
+      <Link
+        href={`/products/${product.id}`}
+        aria-label={`View details for ${product.title}`}
+      >
         <div className="relative h-40 mb-3">
           <Image
             src={product.image}

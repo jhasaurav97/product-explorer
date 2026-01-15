@@ -9,11 +9,13 @@ export default function FavoriteButton({
     isActive,
     onToggle,
 }: FavoriteButtonProps) {
-    return <button
+    return (
+      <button
         onClick={onToggle}
-        aria-label="Toggle favorite"
-        className="text-xl"
-    >
+        aria-label={isActive ? "Remove from favorites" : "Add to favorites"}
+        className="text-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black dark:focus:ring-white"
+      >
         {isActive ? "❤️" : "🤍"}
-    </button>;
+      </button>
+    );
 }
