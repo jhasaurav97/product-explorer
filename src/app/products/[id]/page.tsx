@@ -1,12 +1,33 @@
+"use client";
+
 import Image from "next/image";
-import { fetchProductById } from "@/lib/api";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { Product } from "@/types/product";
 import ProductDetailsClient from "@/components/ProductDetailsClient";
 
+export default async function ProductPage() {
+  const { id } = useParams<{ id: string }>();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [error, setError] = useState(false);
 
-export default async function ProductPage({ params }: { params: Promise<{ id: string }> }) {
-    
-  const { id } = await params;
-  const product = await fetchProductById(id);
+  useEffect(() => {
+    async function loadProduct() {
+      try {
+        const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        setProduct(data);
+      } catch {
+        setError(true);
+      }
+    }
+
+    loadProduct();
+  }, [id]);
+
+  if (error) return <p className="p-6 text-red-600">Failed to load product.</p>;
+  if (!product) return <p className="p-6">Loading...</p>;
 
   return (
     <main className="max-w-5xl mx-auto px-4 py-6 bg-gray-50 dark:bg-black">
