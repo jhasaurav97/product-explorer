@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+      <body className="bg-gray-50 text-gray-900 dark:bg-black dark:text-gray-100">
         <div className="max-w-7xl mx-auto px-4 py-4 flex justify-end">
           <ThemeToggle />
         </div>

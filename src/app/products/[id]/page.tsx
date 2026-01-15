@@ -8,7 +8,7 @@ export default async function ProductPage({ params }: { params: Promise<{ id: st
   const product = await fetchProductById(id);
 
   return (
-    <main className="max-w-5xl mx-auto px-4 py-6 bg-gray-50 dark:bg-gray-900">
+    <main className="max-w-5xl mx-auto px-4 py-6 bg-gray-50 dark:bg-black">
       <div className="grid gap-6 md:grid-cols-2">
         <div className="relative h-80">
           <Image
