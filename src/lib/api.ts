@@ -1,21 +1,25 @@
 import { Product } from "@/types/product";
 
 export async function fetchProducts(): Promise<Product[]> {
-    const res = await fetch("https://fakestoreapi.com/products");
+  const res = await fetch("https://fakestoreapi.com/products", {
+    cache: "no-store",
+  });
 
-    if (!res.ok) {
-        throw new Error("Failed to fetch products");
-    }
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
 
-    return res.json();
-} 
+  return res.json();
+}
 
 export async function fetchProductById(id: string): Promise<Product> {
-    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+  const res = await fetch(`https://fakestoreapi.com/products/${id}`, {
+    cache: "no-store",
+  });
 
-    if (!res.ok) {
-        throw new Error("Failed to fetch product");
-    }
+  if (!res.ok) {
+    throw new Error("Failed to fetch product");
+  }
 
-    return res.json();
+  return res.json();
 }
